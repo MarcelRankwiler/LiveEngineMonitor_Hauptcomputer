@@ -1,0 +1,26 @@
+services:
+  weston:
+    container_name: liveenginemonitor/lembeta1:latest
+    cap_add:
+    - CAP_SYS_TTY_CONFIG
+    device_cgroup_rules:
+    - c 4:0 rmw
+    - c 4:7 rmw
+    - c 13:* rmw
+    - c 226:* rmw
+    environment:
+      ENABLE_RDP: '0'
+      ENABLE_VNC: '1'
+    image: torizon/weston@sha256:3013f4a98c9faa5162674e8a9803b1b1322f3801ba16f0f6f9e591807fe8113e
+    network_mode: host
+    volumes:
+    - source: /tmp
+      target: /tmp
+      type: bind
+    - source: /dev
+      target: /dev
+      type: bind
+    - source: /run/udev
+      target: /run/udev
+      type: bind
+version: '2.4'
